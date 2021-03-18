@@ -30,7 +30,7 @@ jobs:
     - name: Lint with flake8
       run: |
       mkdir testresults
-      pytest Test/unit_testm --junitxml=./testresults/test-results.xml
+      pytest Tests/unit_testm --junitxml=./testresults/test-results.xml
       - name: Publish Unit Test Results
  
       uses: EnricoMi/publish-unit-test-result-action@v1.9
