@@ -29,6 +29,20 @@ jobs:
         if [ -f Application/requirements.txt ]; then pip install -r Application/requirements.txt; fi
     - name: Lint with flake8
       run: |
+      mkdir testresults
+      pytest Test/unit_testm --junitxml=./testresults/test-results.xml
+      - name: Publish Unit Test Results
+ 
+      uses: EnricoMi/publish-unit-test-result-action@v1.9
+      with:
+    # GitHub API Access Token
+      github_token: # default is ${{ github.token }}
+    
+      commit: # optional
+    
+      check_name: # optional, default is Unit Test Results
+      comment_title: # optional
+      files: ./testresults/test-results.xml
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
